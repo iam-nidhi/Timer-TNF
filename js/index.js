@@ -46,15 +46,15 @@ $(document).ready(function () {
         })
     }(), Starfield.prototype = {
         defaults: {
-            starColor: "rgba(255,255,255,1)",
-            bgColor: "rgba(0,0,0,1)",
-            mouseMove: !0,
-            mouseColor: "rgba(0,0,0,0.2)",
+            starColor: "rgba(255,255,255,255)",
+            bgColor: "rgba(255,0,0,255)",
+            mouseMove: !1,
+            mouseColor: "rgba(100,0,200,0.5)",
             mouseSpeed: 20,
-            fps: 15,
-            speed: 3,
-            quantity: 512,
-            ratio: 256,
+            fps: 26,
+            speed: 1,
+            quantity: 322,
+            ratio: 346,
             divclass: "starfield"
         },
         resizer: function() {
@@ -65,7 +65,7 @@ $(document).ready(function () {
             var ratX = this.w / initW,
                 ratY = this.h / initH;
             this.context.canvas.width = this.w, this.context.canvas.height = this.h;
-            for (var i = 0; i < this.n; i++) this.star[i][0] = oldStar[i][0] * ratX, this.star[i][1] = oldStar[i][1] * ratY, this.star[i][3] = this.x + this.star[i][0] / this.star[i][2] * this.star_ratio, this.star[i][4] = this.y + this.star[i][1] / this.star[i][2] * this.star_ratio;
+            for (var i = 1; i < this.n; i++) this.star[i][0] = oldStar[i][0] * ratX, this.star[i][1] = oldStar[i][1] * ratY, this.star[i][3] = this.x + this.star[i][0] / this.star[i][2] * this.star_ratio, this.star[i][4] = this.y + this.star[i][1] / this.star[i][2] * this.star_ratio;
             that.context.fillStyle = that.settings.bgColor, this.context.strokeStyle = this.settings.starColor
         },
         init: function() {
@@ -96,7 +96,7 @@ $(document).ready(function () {
         },
         move: function() {
             function handleOrientation(event) {
-                if (null !== event.beta && null !== event.gamma) {
+                if (null !== event.beta || null !== event.gamma) {
                     var x = event.gamma,
                         y = event.beta;
                     that.portrait || (x = -1 * event.beta, y = event.gamma), that.cursor_x = that.w / 2 + 5 * x, that.cursor_y = that.h / 2 + 5 * y
